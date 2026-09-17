@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>구급대원 증상별 임상추론 참고서 v26</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --navy:#0b3158;--ink:#182431;--muted:#637083;--line:#d8e1ea;
+  --red:#e64a4a;--redbg:#fff1f1;--blue:#3478d6;--bluebg:#eef6ff;
+  --green:#49a86b;--greenbg:#eef9f1;--orange:#e3a52e;--orangebg:#fff8e8;
+  --purple:#7650bd;--purplebg:#f5efff
+}
+body{margin:0;background:#f3f6f9;color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans KR","Malgun Gothic",sans-serif}
+header{
+  background:var(--navy);color:#fff;padding:22px 26px;
+  position:sticky;top:0;z-index:10;box-shadow:0 3px 14px #0002
+}
+header h1{margin:0;font-size:25px;letter-spacing:-1px}
+header p{margin:6px 0 0;font-size:13px;opacity:.85}
+main{max-width:1280px;margin:auto;padding:18px}
+.layout{display:grid;grid-template-columns:225px 1fr;gap:16px}
+nav{background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px;height:max-content;position:sticky;top:92px;box-shadow:0 2px 12px #0000000a}
+nav .nav-title{font-weight:850;padding:4px 7px 10px;color:var(--navy)}
+nav button{display:block;width:100%;border:0;background:transparent;text-align:left;padding:10px 11px;border-radius:9px;cursor:pointer;font-weight:700;color:#334155}
+nav button:hover,nav button.active{background:#eaf1f8;color:var(--navy)}
+.search{width:100%;padding:10px;border:1px solid #ccd6e0;border-radius:9px;margin-bottom:9px;outline:none}
+.poster{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 2px 12px #0000000a}
+.poster-top{display:grid;grid-template-columns:1fr 360px;gap:14px;margin-bottom:15px}
+.poster-title{background:var(--navy);color:#fff;border-radius:13px;padding:20px 22px}
+.poster-title .eyebrow{font-size:12px;opacity:.8;margin-bottom:5px}
+.poster-title h2{font-size:30px;margin:0;letter-spacing:-1px}
+.poster-title p{margin:7px 0 0;opacity:.9}
+.guide{border:1px solid #bccbda;border-radius:13px;padding:14px 16px;background:#fff}
+.guide strong{display:block;color:var(--navy);margin-bottom:7px}
+.guide ul{margin:0;padding-left:19px;line-height:1.55;font-size:13px}
+.central{width:300px;margin:8px auto 12px;background:var(--navy);color:#fff;text-align:center;border-radius:12px;padding:12px 15px;font-size:22px;font-weight:900}
+.down{text-align:center;color:#8391a0;font-size:22px;line-height:1}
+.section-title{display:block;width:max-content;max-width:100%;margin:15px auto 12px;background:var(--navy);color:#fff;border-radius:10px;padding:8px 22px;font-weight:900;font-size:18px}
+.flow-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px}
+.flow-card{border:1px solid var(--line);border-radius:11px;overflow:hidden;background:#fff}
+.flow-card .head{padding:9px 11px;font-size:16px;font-weight:900;background:#edf4fa;color:var(--navy);border-bottom:1px solid var(--line)}
+.flow-card .body{padding:10px 12px;line-height:1.52;font-size:13px}
+.flow-card ul{margin:0;padding-left:18px}
+.flow-card li{margin:2px 0}
+.flow-card.red{border-color:#f0b0b0;background:var(--redbg)}
+.flow-card.red .head{background:#ffe0e0;color:#a92828}
+.flow-card.blue{border-color:#b4d1f4;background:var(--bluebg)}
+.flow-card.blue .head{background:#dcecff}
+.flow-card.green{border-color:#b7dfc4;background:var(--greenbg)}
+.flow-card.green .head{background:#ddf3e4}
+.flow-card.orange{border-color:#efd18c;background:var(--orangebg)}
+.flow-card.orange .head{background:#fff0c9}
+.flow-card.purple{border-color:#cfbbed;background:var(--purplebg)}
+.flow-card.purple .head{background:#eadffd}
+.redflag{margin-top:15px;border:2px solid #ef5350;border-radius:11px;background:#fff5f5;padding:12px 15px}
+.redflag .rf-title{color:#b42323;font-size:18px;font-weight:950;margin-bottom:6px}
+.redflag ul{margin:0;padding-left:20px;line-height:1.55}
+.check-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px}
+.check{background:#f7f9fb;border:1px solid #dce4ec;border-radius:9px;padding:9px 11px;font-size:13px}
+.memory{margin-top:13px;background:#eef4f9;border-left:5px solid var(--navy);border-radius:8px;padding:12px 14px;line-height:1.55}
+.branch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:11px}
+.branch{border:1px solid #cbd7e3;border-radius:11px;background:#fff;padding:12px}
+.branch h4{margin:0 0 7px;color:var(--navy);font-size:16px}
+.branch h5{margin:10px 0 5px;font-size:13px}
+.branch ul{margin:0;padding-left:18px;font-size:13px;line-height:1.5}
+.branch p{font-size:12px;margin:8px 0 0;color:#475569}
+.gcs-box{border:1px solid #b9cee3;border-radius:12px;background:#f7fbff;padding:13px}
+.gcs-score{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.gcs-score div{background:#fff;border:1px solid #d7e2ec;border-radius:9px;text-align:center;padding:9px;font-weight:800}
+.gcs-score span{display:block;font-size:20px;color:var(--navy)}
+@media(max-width:850px){.layout{grid-template-columns:1fr}nav{position:static}.poster-top{grid-template-columns:1fr}.gcs-score{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){main{padding:8px}.poster{padding:11px}.central{width:90%;font-size:19px}.poster-title h2{font-size:24px}}
+</style>
+
+<style>
+@media(max-width:700px){
+body{background:#f4f1e8!important}
+body>*:not(#mobileNotebook){display:none!important}
+#mobileNotebook{display:flex!important;position:fixed;inset:0;z-index:99999;flex-direction:column;background:#f7f4ea;color:#20242a;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Malgun Gothic",sans-serif}
+.mn-top{height:56px;display:flex;align-items:center;gap:8px;padding:0 10px;box-sizing:border-box;background:#fffdf7;border-bottom:1px solid #ddd4c3}
+.mn-title{flex:1;text-align:center;font-size:18px;font-weight:800}.mn-count{font-size:11px;color:#777}.mn-btn{border:0;background:none;font-size:24px;padding:7px}
+.mn-page{flex:1;overflow:auto;padding:13px 12px 75px}.mn-card{background:#fffdf8;border:1px solid #ddd5c5;border-radius:14px;padding:14px;margin-bottom:11px;box-shadow:0 2px 7px rgba(0,0,0,.05)}
+.mn-card h3{font-size:15px;margin:0 0 9px}.mn-summary,.mn-card li,.mn-branch,.mn-memory p{font-size:14px;line-height:1.6}
+.mn-danger{border-left:5px solid #d94b4b}.mn-danger ul,.mn-check{padding-left:20px}.mn-danger li,.mn-check li{margin:4px 0}
+.mn-tree{display:flex;flex-direction:column;gap:7px}.mn-branch{padding:9px 10px;background:#f0f3f5;border-radius:9px}
+.mn-memory{background:#fff4c7;border-color:#e7d58b}.mn-memory p{margin:0}
+.mn-bottom{position:fixed;bottom:0;left:0;right:0;height:60px;display:flex;justify-content:space-around;align-items:center;background:#fffdf7;border-top:1px solid #ddd4c3;padding-bottom:env(safe-area-inset-bottom);z-index:100000}
+.mn-nav{border:0;background:none;font-weight:700;font-size:13px}.mn-nav span{display:block;font-size:20px}
+.mn-drawer{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:100001;display:none}.mn-drawer.open{display:block}
+.mn-menu{width:min(86vw,360px);height:100%;overflow:auto;background:#fffdf8;padding:16px 12px;box-sizing:border-box}.mn-menu h2{font-size:18px;margin:7px}.mn-item{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid #eee7da;background:none;padding:12px 9px;font-size:15px}.mn-item.active{font-weight:800;background:#f1eadb;border-radius:8px}
+.mn-install{margin:8px 0 12px;padding:10px;background:#edf4ff;border-radius:9px;font-size:12px;line-height:1.5}
+}
+@media(min-width:701px){#mobileNotebook{display:none}}
+</style>
+
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#0b3158">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="구급 임상추론">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icon.svg">
+</head>
+<body>
+<header><h1>구급대원 증상별 임상추론 참고서</h1><p>현장에서 빠르게, 그러나 놓치지 않게 · 증상별 임상추론과 응급 감별을 한눈에 확인하는 교육용 참고서</p></header>
+<main>
+<div class="layout">
+<nav id="nav"></nav>
+<section id="content"></section>
+</div>
+</main>
+<script src="./data.js"></script>
+<script>
+
+
+
+function esc(v){
+  return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+}
+function bullets(a){
+  if(!a||!a.length)return "";
+  return "<ul>"+a.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ul>";
+}
+function tone(i){
+  return ["red","orange","blue","green","purple"][i%5];
+}
+function renderTree(tree){
+  return tree.map((x,i)=>`
+    <div class="flow-card ${tone(i)}">
+      <div class="head">${esc(x[0])}</div>
+      <div class="body"><b>${esc(x[1])}</b></div>
+    </div>`).join("");
+}
+function show(k){
+  const d=data[k];
+  document.querySelectorAll("nav button[data-key]").forEach(b=>b.classList.toggle("active",b.dataset.key===k));
+
+  let branchHtml="";
+  if(d.branches){
+    branchHtml=`
+      <div class="section-title">📍 통증 위치에 따른 추가 감별</div>
+      <div class="branch-grid">
+        ${d.branches.map(b=>`
+          <div class="branch">
+            <h4>${esc(b.name)}</h4>
+            <h5>주요 감별</h5>${bullets(b.causes)}
+            <h5>무엇을 확인할까?</h5>${bullets(b.check)}
+            <p><b>기억:</b> ${esc(b.point)}</p>
+          </div>`).join("")}
+      </div>`;
+  }
+
+  let gcsHtml="";
+  if(d.gcs){
+    gcsHtml=`
+      <div class="section-title">🧠 의식수준 구조화 평가</div>
+      <div class="gcs-box">
+        <div class="gcs-score">
+          <div><span>E</span>눈뜨기<br>1~4점</div>
+          <div><span>V</span>언어반응<br>1~5점</div>
+          <div><span>M</span>운동반응<br>1~6점</div>
+          <div><span>3~15</span>총점</div>
+        </div>
+        ${bullets(d.gcs.check)}
+        <div class="memory"><b>기억 포인트</b><br>${esc(d.gcs.point)}</div>
+      </div>`;
+  }
+
+  content.innerHTML=`
+    <div class="poster">
+      <div class="poster-top">
+        <div class="poster-title">
+          <div class="eyebrow">구급대원 임상추론 참고서 · 증상별 감별진단 GUIDE</div>
+          <h2>${esc(k)}</h2>
+          <p>${esc(d.summary)}</p>
+        </div>
+        <div class="guide">
+          <strong>현장에서 빠르게, 그러나 놓치지 않게</strong>
+          <ul>
+            <li>증상의 시작 시점·양상·위치·방사</li>
+            <li>동반 증상과 위험신호</li>
+            <li>V/S · SpO₂ · 의식수준 · 혈당</li>
+            <li>과거력·복용약·외상·임신 가능성</li>
+            <li>시간 경과에 따른 변화와 반복 재평가</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="central">🔎 ${esc(k)}</div>
+      <div class="down">↓</div>
+
+      <div class="section-title">증상에서 생각의 흐름</div>
+      <div class="flow-grid">${renderTree(d.tree||[])}</div>
+
+      <div class="redflag">
+        <div class="rf-title">⚠ 위험 신호 (Red Flag)</div>
+        ${bullets(d.red)}
+      </div>
+
+      ${branchHtml}
+      ${gcsHtml}
+
+      <div class="section-title">무엇을 확인할까?</div>
+      <div class="check-grid">
+        ${(d.check||[]).map(x=>`<div class="check">✓ ${esc(x)}</div>`).join("")}
+      </div>
+
+      <div class="memory"><b>구급대원 기억 포인트</b><br>${esc(d.memory)}</div>
+    </div>`;
+}
+function buildNav(){
+  nav.innerHTML=
+    '<div class="nav-title">증상별 바로가기</div>'+
+    '<input class="search" id="search" placeholder="증상 검색…">'+
+    Object.keys(data).map(k=>`<button data-key="${esc(k)}">${esc(k)}</button>`).join("");
+
+  const search=document.getElementById("search");
+  search.oninput=()=>{
+    const q=search.value.trim();
+    document.querySelectorAll("nav button[data-key]").forEach(b=>{
+      b.style.display=(!q||b.dataset.key.includes(q))?"block":"식은땀은 교감신경 반응의 신호일 수 있다. 저혈당뿐 아니라 심근허혈, 쇼크·저관류, 저산소증, 심한 통증 등에서도 나타날 수 있으므로 원인을 하나로 단정하지 않는다. 특히 식은땀에 흉통·호흡곤란·오심·창백·실신·저혈압이 동반되면 심혈관계 응급질환을 우선 고려하고, 혈당과 활력징후를 함께 확인한다.";
+    });
+  };
+  document.querySelectorAll("nav button[data-key]").forEach(b=>{
+    b.onclick=()=>{
+      show(b.dataset.key);
+      history.replaceState(null,"","#"+encodeURIComponent(b.dataset.key));
+    };
+  });
+}
+buildNav();
+const hashKey=decodeURIComponent(location.hash.replace(/^#/,""));
+show(data[hashKey]?hashKey:Object.keys(data)[0]);
+</script>
+
+<div id="mobileNotebook">
+ <div class="mn-top"><button class="mn-btn" id="mnMenuBtn">☰</button><div class="mn-title" id="mnTitle">구급대원 임상추론 수첩</div><div class="mn-count" id="mnCount"></div></div>
+ <main class="mn-page" id="mnPage"></main>
+ <div class="mn-bottom"><button class="mn-nav" id="mnPrev"><span>‹</span>이전</button><button class="mn-nav" id="mnHome"><span>⌂</span>목차</button><button class="mn-nav" id="mnNext"><span>›</span>다음</button></div>
+ <div class="mn-drawer" id="mnDrawer"><div class="mn-menu"><h2>📖 증상별 수첩</h2><div class="mn-install">휴대폰에서는 세로 수첩 화면으로 자동 전환됩니다. 좌우로 밀어서 다음 증상으로 이동할 수 있습니다.</div><div id="mnItems"></div></div></div>
+</div>
+
+<script>
+(function(){
+function pocket(){
+ if(typeof data==='undefined')return;
+ const keys=Object.keys(data), page=document.getElementById('mnPage'), title=document.getElementById('mnTitle'), count=document.getElementById('mnCount'), items=document.getElementById('mnItems'), drawer=document.getElementById('mnDrawer');
+ let i=Math.max(0,keys.indexOf('호흡곤란'));
+ const esc=x=>String(x??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+ function list(a,cl){return '<ul class="'+cl+'">'+(a||[]).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>'}
+ function render(){
+  const k=keys[i],d=data[k]||{}; title.textContent=d.title||k; count.textContent=(i+1)+' / '+keys.length;
+  const tree=d.tree||[], red=d.red||d.danger||[], check=d.check||[];
+  page.innerHTML='<section class="mn-card"><h3>📌 핵심</h3><div class="mn-summary">'+esc(d.summary||'')+'</div></section>'+
+  (red.length?'<section class="mn-card mn-danger"><h3>🚨 위험신호</h3>'+list(red,'')+'</section>':'')+
+  (tree.length?'<section class="mn-card"><h3>🧠 증상에서 생각의 흐름</h3><div class="mn-tree">'+tree.map(x=>Array.isArray(x)?'<div class="mn-branch">'+esc(x[0])+(x[1]?'<br><b>'+esc(x[1])+'</b>':'')+'</div>':'<div class="mn-branch">'+esc(x)+'</div>').join('')+'</div></section>':'')+
+  (check.length?'<section class="mn-card"><h3>🔎 무엇을 확인할까?</h3>'+list(check,'mn-check')+'</section>':'')+
+  (d.memory?'<section class="mn-card mn-memory"><h3>⭐ 현장 기억 포인트</h3><p>'+esc(d.memory)+'</p></section>':'');
+  page.scrollTop=0;document.querySelectorAll('.mn-item').forEach((e,n)=>e.classList.toggle('active',n===i));
+ }
+ items.innerHTML=keys.map((k,n)=>'<button class="mn-item" data-i="'+n+'">'+esc(data[k].title||k)+'</button>').join('');
+ items.querySelectorAll('.mn-item').forEach(e=>e.onclick=()=>{i=+e.dataset.i;drawer.classList.remove('open');render()});
+ document.getElementById('mnMenuBtn').onclick=()=>drawer.classList.add('open');document.getElementById('mnHome').onclick=()=>drawer.classList.add('open');drawer.onclick=e=>{if(e.target===drawer)drawer.classList.remove('open')};
+ document.getElementById('mnPrev').onclick=()=>{i=(i-1+keys.length)%keys.length;render()};document.getElementById('mnNext').onclick=()=>{i=(i+1)%keys.length;render()};
+ let sx=0,sy=0;page.addEventListener('touchstart',e=>{sx=e.changedTouches[0].clientX;sy=e.changedTouches[0].clientY},{passive:true});page.addEventListener('touchend',e=>{let t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.2)(dx<0?document.getElementById('mnNext'):document.getElementById('mnPrev')).click()},{passive:true});
+ render();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',pocket);else pocket();
+})();
+</script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}</script></body>
+</html>
