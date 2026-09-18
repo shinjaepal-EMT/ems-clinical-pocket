@@ -214,7 +214,7 @@ function buildNav(){
   nav.innerHTML=
     '<div class="nav-title">증상별 바로가기</div>'+
     '<input class="search" id="search" placeholder="증상 검색…">'+
-    Object.keys(data).map(k=>`<button data-key="${esc(k)}">${esc(k)}</button>`).join("");
+    Object.keys(data).sort((a,b)=>a.localeCompare(b,'ko-KR')).map(k=>`<button data-key="${esc(k)}">${esc(k)}</button>`).join("");
 
   const search=document.getElementById("search");
   search.oninput=()=>{
@@ -246,7 +246,7 @@ show(data[hashKey]?hashKey:Object.keys(data)[0]);
 (function(){
 function pocket(){
  if(typeof data==='undefined')return;
- const keys=Object.keys(data), page=document.getElementById('mnPage'), title=document.getElementById('mnTitle'), count=document.getElementById('mnCount'), items=document.getElementById('mnItems'), drawer=document.getElementById('mnDrawer');
+ const keys=Object.keys(data).sort((a,b)=>a.localeCompare(b,'ko-KR')), page=document.getElementById('mnPage'), title=document.getElementById('mnTitle'), count=document.getElementById('mnCount'), items=document.getElementById('mnItems'), drawer=document.getElementById('mnDrawer');
  let i=Math.max(0,keys.indexOf('호흡곤란'));
  const esc=x=>String(x??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
  function list(a,cl){return '<ul class="'+cl+'">'+(a||[]).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>'}
