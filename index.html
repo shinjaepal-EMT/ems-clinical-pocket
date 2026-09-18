@@ -214,13 +214,13 @@ function buildNav(){
   nav.innerHTML=
     '<div class="nav-title">증상별 바로가기</div>'+
     '<input class="search" id="search" placeholder="증상 검색…">'+
-    Object.keys(data).sort((a,b)=>a.localeCompare(b,'ko-KR')).map(k=>`<button data-key="${esc(k)}">${esc(k)}</button>`).join("");
+    Object.keys(data).sort((a,b)=>a.localeCompare(b,"ko")).map(k=>`<button data-key="${esc(k)}">${esc(k)}</button>`).join("");
 
   const search=document.getElementById("search");
   search.oninput=()=>{
     const q=search.value.trim();
     document.querySelectorAll("nav button[data-key]").forEach(b=>{
-      b.style.display=(!q||b.dataset.key.includes(q))?"block":"식은땀은 교감신경 반응의 신호일 수 있다. 저혈당뿐 아니라 심근허혈, 쇼크·저관류, 저산소증, 심한 통증 등에서도 나타날 수 있으므로 원인을 하나로 단정하지 않는다. 특히 식은땀에 흉통·호흡곤란·오심·창백·실신·저혈압이 동반되면 심혈관계 응급질환을 우선 고려하고, 혈당과 활력징후를 함께 확인한다.";
+      b.style.display=(!q||b.dataset.key.includes(q))?"block":"none";
     });
   };
   document.querySelectorAll("nav button[data-key]").forEach(b=>{
@@ -246,7 +246,7 @@ show(data[hashKey]?hashKey:Object.keys(data)[0]);
 (function(){
 function pocket(){
  if(typeof data==='undefined')return;
- const keys=Object.keys(data).sort((a,b)=>a.localeCompare(b,'ko-KR')), page=document.getElementById('mnPage'), title=document.getElementById('mnTitle'), count=document.getElementById('mnCount'), items=document.getElementById('mnItems'), drawer=document.getElementById('mnDrawer');
+ const keys=Object.keys(data).sort((a,b)=>a.localeCompare(b,"ko")), page=document.getElementById('mnPage'), title=document.getElementById('mnTitle'), count=document.getElementById('mnCount'), items=document.getElementById('mnItems'), drawer=document.getElementById('mnDrawer');
  let i=Math.max(0,keys.indexOf('호흡곤란'));
  const esc=x=>String(x??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
  function list(a,cl){return '<ul class="'+cl+'">'+(a||[]).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>'}
